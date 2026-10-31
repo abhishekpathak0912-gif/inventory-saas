@@ -4,12 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Product {
+
+    @JsonIgnore
+    @ManyToOne
+private Category category;
+
+@JsonIgnore
+@ManyToOne
+private Supplier supplier;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,4 +65,20 @@ public class Product {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public Category getCategory() {
+    return category;
+}
+
+public void setCategory(Category category) {
+    this.category = category;
+}
+
+public Supplier getSupplier() {
+    return supplier;
+}
+
+public void setSupplier(Supplier supplier) {
+    this.supplier = supplier;
+}
 }
